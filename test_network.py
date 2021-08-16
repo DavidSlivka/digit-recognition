@@ -19,8 +19,8 @@ predictions = model.predict(x_test[:10])
 
 wrong = 0
 for x in range(len(predictions)):
-    print("I predict this number is a:", y_test[x])
-    print("Number Actually Is a:", np.argmax(predictions[x]))
+    print(f"I predict this number is a: {y_test[x]}")
+    print(f"Correct number is a: {np.argmax(predictions[x])}")
     if np.argmax(predictions[x]) != y_test[x]:
         wrong += 1
         print('This one is wrong!')
@@ -31,4 +31,4 @@ for x in range(len(predictions)):
         plt.show()
 
 print(f"The program got {wrong} wrong, out of {len(x_test)}")
-print(f"{str(100 - ((wrong/len(x_test))*100))}% correct")
+print(f"{100 - ((wrong/len(x_test))*100)}% correct")
