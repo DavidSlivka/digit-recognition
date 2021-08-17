@@ -1,29 +1,12 @@
 import pygame
 import numpy as np
-import matplotlib.pyplot as plt
 import tensorflow as tf
 
-mainClock = pygame.time.Clock()
-
 pygame.init()
-clock = pygame.time.Clock()
-
-SIDE_MARGIN = 200
-CELL_WIDTH = 25
-CELL_HEIGHT = 25
-
-CELLS = 28
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 
-SCREEN_WIDTH = CELL_WIDTH * CELLS + SIDE_MARGIN
-SCREEN_HEIGHT = CELL_HEIGHT * CELLS
-
-info_font = pygame.font.SysFont('Futura', 25)
-final_font = pygame.font.SysFont('Futura', 30)
-
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption('Number guesser')
 
 
@@ -95,21 +78,21 @@ class Grid:
     def convert_binary(self):
         li = self.pixels
 
-        newMatrix = [[] for x in range(len(li))]
+        new_grid = [[] for x in range(len(li))]
 
         for i in range(len(li)):
             for j in range(len(li[i])):
                 if li[i][j].color == (255,255,255):
-                    newMatrix[i].append(0)
+                    new_grid[i].append(0)
                 else:
-                    newMatrix[i].append(1)
+                    new_grid[i].append(1)
 
         mnist = tf.keras.datasets.mnist
         (x_train, y_train), (x_test, y_test) = mnist.load_data()
         x_test = tf.keras.utils.normalize(x_test, axis=1)
         for row in range(28):
             for x in range(28):
-                x_test[0][row][x] = newMatrix[row][x]
+                x_test[0][row][x] = new_grid[row][x]
 
         return x_test[:1]
 
@@ -148,8 +131,7 @@ def main():
         pygame.display.update()
 
 
-pygame.init()
-width = height = 560
+width, height = 560, 560
 window = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Number Guesser")
 g = Grid(28, 28, width, height)
