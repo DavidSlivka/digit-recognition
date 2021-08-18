@@ -9,7 +9,7 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 
 
-INFO_FONT = pygame.font.SysFont('Futura', 25)
+INFO_FONT = pygame.font.SysFont('Future', 25)
 
 pygame.display.set_caption('Number guesser')
 
@@ -121,11 +121,6 @@ def guess(li):
     plt.show()
 
 
-def draw_text(text, font, text_col, x, y):
-    img = font.render(text, True, text_col)
-    screen.blit(img, (x, y))
-
-
 def draw_screen():
     g.draw(screen)
     pygame.draw.rect(screen, WHITE, (g.width, 0, screen_width, g.height))
@@ -171,12 +166,9 @@ def main():
                         n.color = BLACK
 
             if pygame.mouse.get_pressed()[2]:
-                try:
-                    pos = pygame.mouse.get_pos()
-                    clicked = g.clicked(pos)
-                    clicked.color = WHITE
-                except:
-                    pass
+                pos = pygame.mouse.get_pos()
+                clicked = g.clicked(pos)
+                clicked.color = WHITE
 
         draw_screen()
         pygame.display.update()
